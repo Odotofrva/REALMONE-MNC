@@ -42,7 +42,8 @@
         <h5 id="artist-name">REALM ONE - ALMIGHTY ODOT!</h5>
         <p>AUDIO IS PROVIDED RANDOMLY TO EXPERIENCE REALM ONE ENTIRETY.</p>
         <a href="https://instagram.com/almightyodot" target="_blank" class="btn btn-dark">FOLLOW US ON INSTAGRAM!</a>
-        <audio id="audio" autoplay></audio>
+        <button id="play-button" class="btn btn-light mx-auto d-block" style="margin-top: 20px;" onclick="loadAndPlayAudio()">Play Music</button>
+        <audio id="audio"></audio>
     </div>
 
     <script>
@@ -63,10 +64,12 @@
             return audioFiles[randomIndex];
         }
 
-        function loadAudio() {
+        function loadAndPlayAudio() {
             const audioElement = document.getElementById('audio');
             audioElement.src = getRandomAudioFile();
-            audioElement.play();
+            audioElement.play().catch(error => {
+                console.error("Autoplay was prevented:", error);
+            });
         }
 
         // Load the audio when the page is fully loaded
